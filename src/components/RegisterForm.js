@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Field from './Field';
 import axios from 'axios';
 import { isEmail } from 'validator';
+import Facebook from './Facebook';
 
 class RegisterForm extends Component {
 	state = {
@@ -10,6 +11,7 @@ class RegisterForm extends Component {
 	  },
 	  fieldErrors: {},
 	  status: {},
+	  _saveStatus: 'READY',
 	  checkbox: true
 	};
 
@@ -19,12 +21,13 @@ class RegisterForm extends Component {
 
 		if(this.validate()) return;
 
+		this.setState({ _saveStatus: 'SAVING' })
 		await axios.post('#', email)
 		.then(res => {
-			this.setState({ status: res.data})
+			this.setState({ status: res.data, _saveStatus: 'SUCCESS' })
 			this.props.history.push('/daftar')
 		})
-		.catch(err => this.setState({ fieldErrors: err.response.data }));
+		.catch(err => this.setState({ fieldErrors: err.response.data, _saveStatus: 'ERROR' }));
 	};
 
 	onInputChange = ({ name, value, error }) => {
@@ -34,16 +37,16 @@ class RegisterForm extends Component {
 		fields[name] = value;
 		fieldErrors[name] = error;
 
-		this.setState({ fields, fieldErrors });
+		this.setState({ fields, fieldErrors, _saveStatus: 'READY' });
 	};
 
 	validate = () => {
 		const user = this.state.fields;
 		const fieldErrors = this.state.fieldErrors;
-		const errMessages = Object.keys(fieldErrors).filter((k) => fieldErrors[k]);
+		// const errMessages = Object.keys(fieldErrors).filter((k) => fieldErrors[k]);
 
 		if(!user.email) return true;
-		if(errMessages.length) return true;
+		// if(errMessages.length) return true;
 
 		return false;
 	}
@@ -91,27 +94,19 @@ class RegisterForm extends Component {
 						</div>
 					</div>
 					<div className="block">
-						<button
-						type="submit"
-						disabled={(this.validate()	|| this.state.checkbox)}
-						className="button is-iklanku"
-						>
-							<span>Daftar Gratis</span>
-						</button>
+						{{
+								SAVING: <button className="button is-iklanku" type="submit" disabled><span>Saving...</span></button>,
+								SUCCESS: <button className="button is-iklanku" type="submit" disabled><span>Saved!</span></button>,
+								ERROR: <button className="button is-iklanku" type="submit" disabled={(this.validate()	|| this.state.checkbox)}><span>Save Failed - Retry?</span></button>,
+								READY: <button className="button is-iklanku" type="submit" disabled={(this.validate()	|| this.state.checkbox)}><span>Daftar Gratis</span></button>
+						}[this.state._saveStatus]}
 					</div>
 				</form>
 				<div className="content ortext has-text-centered pt1h">
 					<small>atau</small>
 				</div>
 				<div className="block">
-					<form
-						method="POST"
-						action="{{ route('social_redirect', 'facebook') }}"
-					>
-						<button type="submit" className="button is-fb">
-							Daftar melalui akun Facebook
-						</button>
-					</form>
+					<Facebook />
 				</div>
 				<div className="block">
 					<form
