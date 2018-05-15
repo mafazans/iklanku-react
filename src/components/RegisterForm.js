@@ -3,6 +3,7 @@ import Field from './Field';
 import axios from 'axios';
 import { isEmail } from 'validator';
 import Facebook from './Facebook';
+import Google from './Google';
 
 class RegisterForm extends Component {
 	state = {
@@ -106,17 +107,10 @@ class RegisterForm extends Component {
 					<small>atau</small>
 				</div>
 				<div className="block">
-					<Facebook />
+					<Facebook buttonText="Daftar melalui akun Facebook" />
 				</div>
 				<div className="block">
-					<form
-						method="POST"
-						action="{{ route('social_redirect', 'google') }}"
-					>
-						<button type="submit" className="button is-google">
-							Daftar melalui akun Google
-						</button>
-					</form>
+					<Google buttonText="Daftar melalui akun Google" />
 				</div>
 			</div>
 		);

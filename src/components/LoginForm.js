@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Field from './Field';
 import axios from 'axios';
 import { isEmail } from 'validator';
+import Facebook from './Facebook';
+import Google from './Google';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends Component {
 	state = {
@@ -107,7 +110,7 @@ class LoginForm extends Component {
 			                </div>
 			              </div>
 			              <div className="level-right">
-			                <small className="forgot-pass"><a href="{{ route('forgot-form') }}">Lupa Password</a></small>
+			                <small className="forgot-pass"><Link to="/lupa-password">Lupa Password</Link></small>
 			              </div>
 			            </div>
 			          </div>
@@ -122,14 +125,10 @@ class LoginForm extends Component {
 			          <small>atau</small>
 			        </div>
 			        <div className="block">
-			          <form method="POST" action="{{ route('social_redirect', 'facebook') }}">
-			            <button type="submit" className="button is-fb">Masuk melalui akun Facebook</button>
-			          </form>
+			        	<Facebook buttonText="Masuk melalui akun Facebook"/>
 			        </div>
 			        <div className="block">
-			          <form method="POST" action="{{ route('social_redirect', 'google') }}">
-			            <button type="submit" className="button is-google">Masuk melalui akun Google</button>
-			          </form>
+			          <Google buttonText="Masuk melalui akun Google"/>
 			        </div>
 			      </div>
 			      <div className="column is-4">
