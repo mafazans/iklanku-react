@@ -60,6 +60,7 @@ class LoginForm extends Component {
 	}
 
 	render() {
+		const params = new URLSearchParams(this.props.location.search);
 		return(
 			<div className="hero-body line-one">
 			  <div className="container">
@@ -71,6 +72,11 @@ class LoginForm extends Component {
 			      <div className="column is-4">
 			      </div>
 			      <div className="column">
+			      {params.get('forgot') &&
+			      <div className="notification is-info">
+			          Silahkan cek email Anda untuk mendapatkan password baru.
+			      </div>
+			      }
 			        <form method="POST" onSubmit={this.onFormSubmit}>
 			          <div className="field">
 			            <div className="control">

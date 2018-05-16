@@ -21,6 +21,27 @@ export default class ForgotForm extends Component{
 		this.setState({ fields, fieldErrors });
 	};
 
+	onSubmit = async (evt) => {
+		evt.preventDefault();
+		//make await aixos call
+		// await axios.post('#', user)
+		// .then(res => {
+		// 	this.setState({ status: res.data})
+			this.props.history.push('/signin?forgot=true')
+		// })
+		// .catch(err => this.setState({ fieldErrors: err.response.data }));
+	}
+
+	validate = () => {
+		const user = this.state.fields;
+		// const fieldErrors = this.state.fieldErrors;
+		// const errMessages = Object.keys(fieldErrors).filter((k) => fieldErrors[k]);
+
+		if(!isEmail(user.email)) return true;
+		// if(errMessages.length) return true;
+
+		return false;
+	}
 
 	render(){
 		return(
@@ -34,7 +55,12 @@ export default class ForgotForm extends Component{
 			      <div className="column is-4">
 			      </div>
 			      <div className="column">
-			        <form method="POST" action="{{ route('forgot-send') }}">
+			      {this.state.fieldErrors.err &&
+			      <div className="notification is-danger">
+			          Reset failed
+			      </div>
+			      }
+			        <form onSubmit={this.onSubmit} >
 			          <div className="field">
 			            <div className="control">
 			            	<Field
@@ -48,7 +74,11 @@ export default class ForgotForm extends Component{
 			            </div>
 			          </div>
 			          <div className="block">
-			            <button type="submit" className="button is-iklanku">Request Password Baru</button>
+			            <button
+			            disabled={this.validate()}
+			            type="submit"
+			            className="button is-iklanku"
+			           >Request Password Baru</button>
 			          </div>
 			        </form>
 			      </div>

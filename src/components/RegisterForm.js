@@ -43,7 +43,7 @@ class RegisterForm extends Component {
 
 	validate = () => {
 		const user = this.state.fields;
-		const fieldErrors = this.state.fieldErrors;
+		// const fieldErrors = this.state.fieldErrors;
 		// const errMessages = Object.keys(fieldErrors).filter((k) => fieldErrors[k]);
 
 		if(!user.email) return true;
@@ -98,7 +98,7 @@ class RegisterForm extends Component {
 						{{
 								SAVING: <button className="button is-iklanku" type="submit" disabled><span>Saving...</span></button>,
 								SUCCESS: <button className="button is-iklanku" type="submit" disabled><span>Saved!</span></button>,
-								ERROR: <button className="button is-iklanku" type="submit" disabled={(this.validate()	|| this.state.checkbox)}><span>Save Failed - Retry?</span></button>,
+								ERROR: <button className="button is-iklanku" type="submit" disabled={(this.validate()	|| this.state.checkbox)}><span>Register Failed - Retry?</span></button>,
 								READY: <button className="button is-iklanku" type="submit" disabled={(this.validate()	|| this.state.checkbox)}><span>Daftar Gratis</span></button>
 						}[this.state._saveStatus]}
 					</div>
