@@ -18,7 +18,6 @@ class HomeWrapper extends Component {
 				<Route exact path="/daftar" component={RegisterSuccess} />
 				<Route exact path="/signin" component={LoginForm} />
 				<Route exact path="/lupa-password" component={ForgotForm} />
-
 				<Route component={NotFound} />
 			</Switch>
 			<Footer />

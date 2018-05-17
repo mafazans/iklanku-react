@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import HomeWrapper from './components/HomeWrapper';
-import { BrowserRouter as Router} from 'react-router-dom';
+import DashboardWrapper from './components/DashboardWrapper';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 class App extends Component {
   render() {
     return (
-    	<Router>
-	      <HomeWrapper />
-    	</Router>
+	    	<Router>
+		    	<Switch>
+			    	<Route path="/dashboard" component={DashboardWrapper} />
+			    	<Route path="/" component={HomeWrapper} />
+		    	</Switch>
+	    	</Router>
     );
   }
 }
