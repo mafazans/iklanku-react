@@ -72,7 +72,8 @@ class LoginForm extends Component {
 			      <div className="column is-4">
 			      </div>
 			      <div className="column">
-			      {params.get('forgot') &&
+			      {
+			      	params.get('forgot') &&
 			      <div className="notification is-info">
 			          Silahkan cek email Anda untuk mendapatkan password baru.
 			      </div>
