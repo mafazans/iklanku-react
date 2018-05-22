@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
-import Nav from './Nav';
+import Nav from './layouts/Nav';
 import LandingPage from './LandingPage';
-import Footer from './Footer';
+import Footer from './layouts/Footer';
 import LoginForm from './LoginForm';
 import ForgotForm from './ForgotForm';
 import RegisterSuccess from './RegisterSuccess';
-import NotFound from './NotFound';
+import NotFound from './layouts/NotFound';
 import { Route, Switch } from 'react-router-dom';
 
 class HomeWrapper extends Component {

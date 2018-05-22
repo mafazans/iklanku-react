@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import Dashboard from './Dashboard';
-import SideNav from './SideNav';
-import IconNav from './IconNav';
-import NotFound from './NotFound';
+import Dashboard from './dashboard/Dashboard';
+import Campaign from './dashboard/Campaign';
+import BasicWizard from './dashboard/BasicWizard';
+import SideNav from './layouts/SideNav';
+import IconNav from './layouts/IconNav';
+import NotFound from './layouts/NotFound';
 import { Route, Switch } from 'react-router-dom';
 
 class DashboardWrapper extends Component {
@@ -21,7 +23,8 @@ class DashboardWrapper extends Component {
 					<IconNav />
 					<Switch>
 						<Route exact path="/dashboard" component={Dashboard} />
-						<Route exact path="/dashboard/campaign" component={Dashboard} />
+						<Route exact path="/dashboard/campaign" component={Campaign} />
+						<Route exact path="/dashboard/campaign/wizard" component={BasicWizard} />
 
 						<Route component={NotFound} />
 					</Switch>
