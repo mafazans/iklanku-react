@@ -8,8 +8,14 @@ export default class IconNav extends Component {
 
 	handleClickOutside = () => {
 		this.setState({
-			notifCondition: true,
-			userCondition: true
+			userCondition: true,
+			notifCondition: true
+		})
+	}
+
+	handleClickOutsideKey = key => {
+		this.setState({
+			[key]: true
 		})
 	}
 
@@ -25,13 +31,13 @@ export default class IconNav extends Component {
 		if(this.nodeNotif.contains(evt.target)) {
 			this.setState({
 				notifCondition: !this.state.notifCondition
-			})
+			}, () => this.handleClickOutsideKey("userCondition"))
 			return;
 		}
 		if(this.nodeUser.contains(evt.target)){
 			this.setState({
 				userCondition: !this.state.userCondition
-			})
+			}, () => this.handleClickOutsideKey("notifCondition"))
 			return;
 		}
 		this.handleClickOutside()
